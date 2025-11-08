@@ -30,11 +30,18 @@ const Index = () => {
           Always here to help with your health, safety, and emotional well-being.
           Speak naturally, and I'll understand.
         </p>
-        <Link to="/chat">
-          <Button size="lg" className="text-lg px-8 py-6 rounded-full">
-            Start Talking with Me
-          </Button>
-        </Link>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link to="/auth">
+            <Button size="lg" className="text-lg px-8 py-6 rounded-full">
+              Get Started
+            </Button>
+          </Link>
+          <Link to="/chat">
+            <Button size="lg" variant="outline" className="text-lg px-8 py-6 rounded-full">
+              Try Chat
+            </Button>
+          </Link>
+        </div>
       </section>
 
       {/* Three Modules */}

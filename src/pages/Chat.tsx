@@ -108,7 +108,12 @@ const Chat = () => {
     setIsLoading(true);
 
     try {
-      const { data, error } = await supabase.functions.invoke("chat", {
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      // Use medicine-chat if user is logged in for personalized responses
+      const functionName = user ? "medicine-chat" : "chat";
+      
+      const { data, error } = await supabase.functions.invoke(functionName, {
         body: { 
           messages: [...messages, userMessage].map(m => ({ 
             role: m.role, 
