@@ -14,7 +14,122 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      medicine_intakes: {
+        Row: {
+          created_at: string | null
+          id: string
+          medicine_id: string
+          notes: string | null
+          scheduled_time: string
+          status: string
+          taken_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          medicine_id: string
+          notes?: string | null
+          scheduled_time: string
+          status?: string
+          taken_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          medicine_id?: string
+          notes?: string | null
+          scheduled_time?: string
+          status?: string
+          taken_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "medicine_intakes_medicine_id_fkey"
+            columns: ["medicine_id"]
+            isOneToOne: false
+            referencedRelation: "medicines"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      medicines: {
+        Row: {
+          active: boolean | null
+          created_at: string | null
+          dosage: string
+          end_date: string | null
+          frequency: string
+          id: string
+          name: string
+          notes: string | null
+          start_date: string
+          times: string[]
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string | null
+          dosage: string
+          end_date?: string | null
+          frequency: string
+          id?: string
+          name: string
+          notes?: string | null
+          start_date: string
+          times: string[]
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string | null
+          dosage?: string
+          end_date?: string | null
+          frequency?: string
+          id?: string
+          name?: string
+          notes?: string | null
+          start_date?: string
+          times?: string[]
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          emergency_contact_name: string | null
+          emergency_contact_phone: string | null
+          full_name: string | null
+          id: string
+          phone_number: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          full_name?: string | null
+          id: string
+          phone_number?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          full_name?: string | null
+          id?: string
+          phone_number?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
