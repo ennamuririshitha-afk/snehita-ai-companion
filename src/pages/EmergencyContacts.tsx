@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { EmergencyContactCard } from "@/components/EmergencyContactCard";
 import { AddEmergencyContactDialog } from "@/components/AddEmergencyContactDialog";
 import { useToast } from "@/hooks/use-toast";
+import { Card } from "@/components/ui/card";
 
 interface EmergencyContact {
   id: string;
@@ -57,11 +58,31 @@ const EmergencyContacts = () => {
               <ArrowLeft className="h-6 w-6" />
             </Button>
           </Link>
-          <h1 className="text-2xl font-bold text-foreground">Emergency Contacts</h1>
+          <div className="flex items-center gap-2">
+            <Shield className="h-6 w-6 text-primary" />
+            <h1 className="text-2xl font-bold text-foreground">Raksha</h1>
+          </div>
         </div>
       </header>
 
       <main className="container mx-auto px-6 py-8 max-w-4xl">
+        <div className="mb-6">
+          <Card className="p-4 bg-destructive/10 border-destructive/20">
+            <div className="flex items-start justify-between">
+              <div className="flex-1">
+                <h3 className="font-semibold text-lg text-destructive">Emergency Ambulance</h3>
+                <p className="text-sm text-muted-foreground">National Emergency Number</p>
+                <div className="flex items-center gap-2 mt-2">
+                  <Shield className="h-4 w-4 text-destructive" />
+                  <a href="tel:108" className="text-lg font-bold text-destructive hover:underline">
+                    108
+                  </a>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+
         <div className="mb-6">
           <AddEmergencyContactDialog onContactAdded={fetchContacts} />
         </div>

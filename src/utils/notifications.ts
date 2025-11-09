@@ -33,6 +33,14 @@ export const scheduleMedicineNotification = (medicineName: string, time: string)
     window.focus();
     notification.close();
   };
+
+  // Speak the reminder
+  if ('speechSynthesis' in window) {
+    const utterance = new SpeechSynthesisUtterance(`Time to take your ${medicineName}`);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.9;
+    window.speechSynthesis.speak(utterance);
+  }
 };
 
 export const checkAndScheduleMedicineReminders = (medicines: any[]) => {

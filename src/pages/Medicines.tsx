@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Heart, ArrowLeft, Plus, Pill, Clock, Calendar, Phone } from "lucide-react";
+import { Heart, ArrowLeft, Plus, Pill, Clock, Calendar, Shield } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
@@ -142,8 +142,8 @@ const Medicines = () => {
             <div className="mb-6 grid grid-cols-2 gap-4">
               <Link to="/emergency-contacts" className="w-full">
                 <Button variant="secondary" className="w-full gap-2" size="lg">
-                  <Phone className="h-5 w-5" />
-                  Emergency Contacts
+                  <Shield className="h-5 w-5" />
+                  Raksha
                 </Button>
               </Link>
               <Link to="/appointments" className="w-full">
