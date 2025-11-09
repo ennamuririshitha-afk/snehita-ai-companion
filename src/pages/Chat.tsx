@@ -15,7 +15,7 @@ const Chat = () => {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "assistant",
-      content: "Hello! I'm here to help you. You can speak to me or type your message. How can I assist you today?",
+      content: "Hello! I'm your caring AI companion. I'm here to help you with:\n\n🔔 Medicine reminders with voice alerts\n📅 Doctor appointment scheduling\n💡 Health tips and guidance\n🆘 Instant SOS alerts to family\n📍 Location sharing when needed\n⚡ 24/7 emergency assistance\n💬 Warm conversation anytime\n❤️ Emotional support and comfort\n🎯 I remember your preferences\n\nYou can speak to me or type your message. How can I help you today?",
     },
   ]);
   const [input, setInput] = useState("");
