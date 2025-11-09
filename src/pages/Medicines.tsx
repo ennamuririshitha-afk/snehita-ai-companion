@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Heart, ArrowLeft, Plus, Pill, Clock, Calendar } from "lucide-react";
+import { Heart, ArrowLeft, Plus, Pill, Clock, Calendar, Phone } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import MedicineCard from "@/components/MedicineCard";
 import AddMedicineDialog from "@/components/AddMedicineDialog";
+import { requestNotificationPermission, checkAndScheduleMedicineReminders } from "@/utils/notifications";
 
 export type Medicine = {
   id: string;
@@ -32,7 +33,26 @@ const Medicines = () => {
   useEffect(() => {
     checkUser();
     fetchMedicines();
-  }, []);
+    
+    // Request notification permission
+    requestNotificationPermission().then((granted) => {
+      if (granted) {
+        toast({
+          title: "Notifications Enabled",
+          description: "You'll receive medicine reminders",
+        });
+      }
+    });
+
+    // Check for medicine reminders every minute
+    const interval = setInterval(() => {
+      if (medicines.length > 0) {
+        checkAndScheduleMedicineReminders(medicines);
+      }
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, [medicines]);
 
   const checkUser = async () => {
     const { data: { user } } = await supabase.auth.getUser();
@@ -51,6 +71,11 @@ const Medicines = () => {
 
       if (error) throw error;
       setMedicines(data || []);
+      
+      // Check and schedule notifications for medicines
+      if (data) {
+        checkAndScheduleMedicineReminders(data);
+      }
     } catch (error: any) {
       toast({
         title: "Error",
@@ -112,6 +137,21 @@ const Medicines = () => {
                 <Plus className="h-5 w-5" />
                 Add Medicine
               </Button>
+            </div>
+
+            <div className="mb-6 grid grid-cols-2 gap-4">
+              <Link to="/emergency-contacts" className="w-full">
+                <Button variant="secondary" className="w-full gap-2" size="lg">
+                  <Phone className="h-5 w-5" />
+                  Emergency Contacts
+                </Button>
+              </Link>
+              <Link to="/appointments" className="w-full">
+                <Button variant="secondary" className="w-full gap-2" size="lg">
+                  <Calendar className="h-5 w-5" />
+                  Appointments
+                </Button>
+              </Link>
             </div>
 
             {medicines.length === 0 ? (

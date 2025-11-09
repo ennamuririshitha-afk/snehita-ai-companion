@@ -14,6 +14,75 @@ export type Database = {
   }
   public: {
     Tables: {
+      appointments: {
+        Row: {
+          appointment_date: string
+          created_at: string | null
+          doctor_name: string
+          id: string
+          location: string | null
+          notes: string | null
+          specialty: string | null
+          status: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          appointment_date: string
+          created_at?: string | null
+          doctor_name: string
+          id?: string
+          location?: string | null
+          notes?: string | null
+          specialty?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          appointment_date?: string
+          created_at?: string | null
+          doctor_name?: string
+          id?: string
+          location?: string | null
+          notes?: string | null
+          specialty?: string | null
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      emergency_contacts: {
+        Row: {
+          created_at: string | null
+          id: string
+          name: string
+          phone: string
+          relationship: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          name: string
+          phone: string
+          relationship?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          name?: string
+          phone?: string
+          relationship?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       medicine_intakes: {
         Row: {
           created_at: string | null
